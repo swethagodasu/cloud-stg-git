@@ -1,15 +1,21 @@
-name: Build and Deploy to cloud run
-'on': push
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   deploy:
-    permissions:
-      contents: read
-      id-token: write
+    name: Deploy
     runs-on: ubuntu-latest
-steps:
-    - uses: actions/checkout@master
-    - name: Checkout
-    - uses: actions/checkout@v0
-    - name: Deploy to GCS
-      run: |
-        gcloud storage buckets create gs://project-name-random99
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Sync
+        uses: swethagodasu/cloud-stg-git@1.3
+        with:
+          secrets: ${{ secrets.google_service_account_credentials }}
+          bucket: 'git-to-storage-sync'
+          exclude: '.*\.md$|\.gitignore$|\.git/.*$|\.github/.*$'
+
