@@ -7,8 +7,9 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
 steps:
-  - name: Checkout
-    uses: actions/checkout@v0
-  - name: Deploy to GCS
-    run: |
-      gcloud storage buckets create gs://project-name-random99
+  deploy:
+    - name: Checkout
+      uses: actions/checkout@v0
+    - name: Deploy to GCS
+      run: |
+        gcloud storage buckets create gs://project-name-random99
