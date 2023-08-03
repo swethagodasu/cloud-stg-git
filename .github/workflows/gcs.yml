@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Sync
-        uses: swethagodasu/cloud-stg-git@0
+        uses: swethagodasu/cloud-stg-git@main
         with:
           secrets: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS }}
           bucket: 'git-to-storage-sync'
